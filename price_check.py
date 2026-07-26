@@ -1,6 +1,5 @@
-print("NEW VERSION")
-
 import requests
+import re
 
 url = "https://kakaku.com/item/K0001630332/"
 
@@ -10,5 +9,13 @@ headers = {
 
 response = requests.get(url, headers=headers)
 
-print("ステータス:", response.status_code)
-print(response.text[:1000])
+html = response.content.decode("shift_jis", errors="ignore")
+
+print("価格文字列を検索中")
+
+for word in ["最安", "価格", "円", "¥"]:
+    pos = html.find(word)
+
+    if pos >= 0:
+        print(f"\n=== {word} ===")
+        print(html[pos-200:pos+500])
