@@ -1,3 +1,5 @@
+print("NEW VERSION")
+
 import requests
 
 url = "https://kakaku.com/item/K0001630332/"
