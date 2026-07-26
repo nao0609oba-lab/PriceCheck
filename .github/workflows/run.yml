@@ -3,6 +3,10 @@ name: Run Price Check
 on:
   workflow_dispatch:
 
+  schedule:
+    - cron: '0 0 * * *'      # 毎日9時
+    - cron: '0 12 * * *'     # 毎日21時
+
 jobs:
   run:
     runs-on: ubuntu-latest
