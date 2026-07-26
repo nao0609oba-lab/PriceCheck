@@ -11,11 +11,12 @@ response = requests.get(url, headers=headers)
 
 html = response.content.decode("shift_jis", errors="ignore")
 
-print("価格文字列を検索中")
+match = re.search(
+    r'([\d,]+)<span class="p-prdInfoLowprice_currency">円</span>',
+    html
+)
 
-for word in ["最安", "価格", "円", "¥"]:
-    pos = html.find(word)
-
-    if pos >= 0:
-        print(f"\n=== {word} ===")
-        print(html[pos-200:pos+500])
+if match:
+    print("最安価格:", match.group(1))
+else:
+    print("価格が見つかりません")
